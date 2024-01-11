@@ -10,8 +10,6 @@ const store = useStore();
 
 const isAdmin = computed(() => store.getters['user/isAdmin']);
 
-const props = defineProps(["addToCart"])
-
 let products = ref([]);
 
 //product.value er et array af objekter
@@ -25,7 +23,6 @@ const setFilterCategory = (category) => {
 }
 
 const filteredProducts = computed(() => {
-
   if (filteredCategory.value === "") return products.value;
 
   // Products fungerer ikke uden vi skaffer en liste med .value
@@ -55,11 +52,6 @@ const productModal = ref();
 const editProduct = (productId) => {
   productModal.value.openEditProductModal(products.value.find((item) => item.id === productId));
 }
-
-const addToCart = (productId) => {
-  props.addToCart(productId, 1);
-}
-
 </script>
 
 <template>
@@ -85,7 +77,6 @@ const addToCart = (productId) => {
             :isAdmin="isAdmin"
             :deleteProduct="deleteProduct"
             :editProduct="editProduct"
-            :addToCart="addToCart"
             :title="product.title"
             :frontImage="product.frontImage"
             :price="product.price"

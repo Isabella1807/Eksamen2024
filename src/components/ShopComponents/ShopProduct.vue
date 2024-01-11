@@ -1,5 +1,13 @@
 <script setup>
-const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 'addToCart', 'deleteProduct', 'isAdmin'])
+import {useStore} from "vuex";
+
+const store = useStore();
+
+const addToCart = () => {
+  store.dispatch('cart/addItemToCart', {productID: props.id, amount: 1});
+}
+
+const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 'deleteProduct', 'isAdmin'])
 
 </script>
 
@@ -14,7 +22,7 @@ const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 
         <p>{{ props.price }} DKK</p>
       </div>
       <div class="productAddContainer">
-        <button class="productAddProductButton" v-if="!props.isAdmin" @click="() => props.addToCart(props.id)">
+        <button class="productAddProductButton" v-if="!props.isAdmin" @click="() => addToCart()">
           <img src="../../assets/images/add.png" alt="tilføj">
         </button>
         <div class="adminShopItemsContainer">

@@ -6,7 +6,7 @@ import {useStore} from "vuex";
 const router = useRouter();
 const store = useStore();
 
-const props = defineProps(['totalCartAmount']);
+const totalCartAmount = computed (() => store.getters['cart/totalAmount'])
 
 const path = computed(() => router.currentRoute);
 const isAdmin = computed(() => store.getters['user/isAdmin']);
@@ -58,7 +58,7 @@ const burgerMenuClick = () => {
         </div>
         <div class="headerCartIcon">
           <img src="../assets/cart.png" alt="Shopping Cart">
-          <p>{{ props.totalCartAmount }}</p>
+          <p>{{ totalCartAmount }}</p>
         </div>
       </div>
 
