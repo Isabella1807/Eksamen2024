@@ -4,8 +4,13 @@ import ShopCategorizer from "@/components/ShopComponents/ShopCategorizer.vue";
 import {onMounted, computed, ref} from "vue";
 import productDB from "../database/products";
 import AddNewProductModal from "@/components/ShopComponents/AddNewProductModal.vue";
+import {useStore} from "vuex";
 
-const props = defineProps(['isAdmin','setIsAdmin', "addToCart"])
+const store = useStore();
+
+const isAdmin = computed(() => store.getters['user/isAdmin']);
+
+const props = defineProps(["addToCart"])
 
 let products = ref([]);
 

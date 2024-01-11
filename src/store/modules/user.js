@@ -21,6 +21,9 @@ const actions = {
             return true;
         }
         return false;
+    },
+    logout({commit}){
+        commit('setAdminState', {newAdminState: false});
     }
 }
 

@@ -1,13 +1,17 @@
 <script setup>
 import {useRouter} from 'vue-router';
 import {computed, ref} from 'vue';
-
-const props = defineProps(['isAdmin', 'setIsAdmin', 'totalCartAmount']);
+import {useStore} from "vuex";
 
 const router = useRouter();
+const store = useStore();
+
+const props = defineProps(['totalCartAmount']);
+
 const path = computed(() => router.currentRoute);
+const isAdmin = computed(() => store.getters['user/isAdmin']);
 const adminLogout = () => {
-  props.setIsAdmin(false);
+  store.dispatch('user/logout');
 
   //Reroute til forsiden på logud, medmindre de er på shop
   if (path.value.value.path !== "/shop") {
@@ -47,9 +51,9 @@ const burgerMenuClick = () => {
             <p class="routerlink">Om Mortens Chokolade</p>
             <p class="routerlink">Kontakt</p>
             <p>
-              <router-link to="/admin" class="routerlink" v-if="props.isAdmin">admin</router-link>
+              <router-link to="/admin" class="routerlink" v-if="isAdmin">admin</router-link>
             </p>
-            <p class="routerlink" v-if="props.isAdmin" @click="adminLogout">log ud</p>
+            <p class="routerlink" v-if="isAdmin" @click="adminLogout">log ud</p>
           </nav>
         </div>
         <div class="headerCartIcon">
@@ -77,9 +81,9 @@ const burgerMenuClick = () => {
           </p>
 
           <p>
-            <router-link to="/admin" class="routerlink" v-if="props.isAdmin">admin</router-link>
+            <router-link to="/admin" class="routerlink" v-if="isAdmin">admin</router-link>
           </p>
-          <p class="routerlink" v-if="props.isAdmin" @click="adminLogout">log ud</p>
+          <p class="routerlink" v-if="isAdmin" @click="adminLogout">log ud</p>
         </div>
       </div>
 

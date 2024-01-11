@@ -4,13 +4,6 @@ import {useStore} from 'vuex'
 
 const store = useStore();
 
-const props = defineProps(['isAdmin', 'setIsAdmin'])
-
-const adminLogin = {
-  username: "admin",
-  password: "qwe"
-}
-
 const adminName = ref('');
 const adminPassword = ref('');
 
@@ -26,7 +19,6 @@ const loginAsAdmin = async () => {
     errorInLogin = true;
   }
 }
-
 </script>
 
 <template>
