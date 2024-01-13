@@ -3,6 +3,9 @@ import {ref, computed} from 'vue';
 import Modal from "@/components/Modal.vue";
 import productDB from "@/database/products";
 import {useImageUpload} from "@/components/imageUpload";
+import {useStore} from "vuex";
+
+const store = useStore();
 
 const {handleFileUpload, imageUrl} = useImageUpload();
 
@@ -38,22 +41,20 @@ const submitNewProductForm = () => {
     dataIsMissing.value = true;
     return;
   }
-
-  //SUPER VIGTIGT DE ER I RIGTIG RÆKKEFØLGE!!!
-  productDB.addNewProduct(
-      formTitle.value,
-      imageUrl.value,
-      formDescription.value,
-      formPrice.value,
-      formCategory.value
-  );
-
+  store.dispatch('products/addProduct', {
+    title: formTitle.value,
+    frontImage: imageUrl.value,
+    description: formDescription.value,
+    price: formPrice.value,
+    category: formCategory.value
+  })
   hideAddProductWindow();
 }
 
 const addProductModalVisible = ref(false);
 const isEditing = ref(false);
 const editingProductId = ref('');
+
 const openEditProductModal = (product) => {
   isEditing.value = true;
   editingProductId.value = product.id;

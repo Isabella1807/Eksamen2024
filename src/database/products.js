@@ -36,9 +36,9 @@ const getAllProducts = async (myCategory) => {
 /** //////////// **/
 /** ADD PRODUCTS **/
 /** //////////// **/
-const addNewProduct = async (title, frontImage, description, price, category) => {
+const addNewProduct = async ({title, frontImage, description, price, category}) => {
 
-    await addDoc(collection(myDB, productsCollection), {
+    const result = await addDoc(collection(myDB, productsCollection), {
         title,
         frontImage,
         description,
@@ -47,6 +47,7 @@ const addNewProduct = async (title, frontImage, description, price, category) =>
     }).catch((e) => {
         console.error("Error adding document: ", e);
     });
+    return result.id;
 }
 
 

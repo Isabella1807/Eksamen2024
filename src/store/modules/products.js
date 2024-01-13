@@ -12,6 +12,11 @@ const getters = {
 }
 
 const actions = {
+    addProduct({commit}, product){
+      commit('addNewProductToDB', product);
+      console.log("addproduct");
+      console.log(product);
+    },
     loadProducts({state, commit}) {
         if (state.products.length === 0) {
             commit('fetchAllProductsFromDB')
@@ -23,6 +28,13 @@ const actions = {
 }
 
 const mutations = {
+    async addNewProductToDB(state, product){
+        const newID = await productDB.addNewProduct(product);
+        state.products.push({
+            ...product,
+            id: newID
+        })
+    },
     async fetchAllProductsFromDB(state) {
       state.products = await productDB.getAllProducts();
     },
