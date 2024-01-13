@@ -74,16 +74,16 @@ const modalTitle = computed(() => {
 });
 
 const submitChangedProductForm = async () => {
-  await productDB.editProduct(
-      editingProductId.value,
-      {
-        title: formTitle.value,
-        description: formDescription.value,
-        frontImage: imageUrl.value,
-        price: formPrice.value,
-        category: formCategory.value,
-      }
-  )
+  await store.dispatch('products/editProduct', {
+    productID: editingProductId.value,
+    product: {
+      title: formTitle.value,
+      description: formDescription.value,
+      frontImage: imageUrl.value,
+      price: formPrice.value,
+      category: formCategory.value,
+    }
+  })
   hideAddProductWindow();
 }
 
