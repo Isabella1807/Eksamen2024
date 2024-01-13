@@ -32,23 +32,20 @@ const hideAddProductWindow = () => {
 
 // TJEK OM ALLE VÆRDIER ER SAT. IKKE CREATE HVIS NOGET MANGLER
 
-const submitNewProductForm = () => {
-  if (
-      formTitle.value === ''
-      || formDescription.value === ''
-      || formPrice.value === ''
-      || formCategory.value === '') {
-    dataIsMissing.value = true;
-    return;
-  }
-  store.dispatch('products/addProduct', {
+const submitNewProductForm = async () => {
+  const productDataIsValid = await store.dispatch('products/addProduct', {
     title: formTitle.value,
     frontImage: imageUrl.value,
     description: formDescription.value,
     price: formPrice.value,
     category: formCategory.value
-  })
-  hideAddProductWindow();
+  });
+
+  if (productDataIsValid) {
+    hideAddProductWindow();
+  } else {
+    dataIsMissing.value = true;
+  }
 }
 
 const addProductModalVisible = ref(false);
@@ -74,7 +71,7 @@ const modalTitle = computed(() => {
 });
 
 const submitChangedProductForm = async () => {
-  await store.dispatch('products/editProduct', {
+  const productDataIsValid = await store.dispatch('products/editProduct', {
     productID: editingProductId.value,
     product: {
       title: formTitle.value,
@@ -84,7 +81,11 @@ const submitChangedProductForm = async () => {
       category: formCategory.value,
     }
   })
-  hideAddProductWindow();
+  if (productDataIsValid) {
+    hideAddProductWindow();
+  } else {
+    dataIsMissing.value = true;
+  }
 }
 
 </script>
