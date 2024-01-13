@@ -9,12 +9,10 @@ import {useStore} from "vuex";
 const store = useStore();
 
 const isAdmin = computed(() => store.getters['user/isAdmin']);
+const products = computed(() => store.getters['products/allProducts']);
 
-let products = ref([]);
-
-//product.value er et array af objekter
-onMounted(async () => {
-  products.value = await productDB.getAllProducts();
+onMounted(() => {
+  store.dispatch('products/loadProducts')
 });
 
 let filteredCategory = ref("");
