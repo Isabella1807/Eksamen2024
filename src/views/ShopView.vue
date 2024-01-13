@@ -36,15 +36,6 @@ const filteredProducts = computed(() => {
 });
 
 ////////////ITEM INTERACTION///////////////
-const deleteProduct = async (productId) => {
-  if (confirm('Are you sure you want to delete?')) {
-    await productDB.deleteProduct(productId);
-    //fjerner produkter lokalt, istedet for at brugeren skal opdatere for at se ændringen
-    products.value = products.value.filter((productObject) => productObject.id !== productId);
-  }
-}
-
-//Reference til mit komponent, længere nede..
 const productModal = ref();
 
 const editProduct = (productId) => {
@@ -73,7 +64,6 @@ const editProduct = (productId) => {
             :key="product.id"
             :id="product.id"
             :isAdmin="isAdmin"
-            :deleteProduct="deleteProduct"
             :editProduct="editProduct"
             :title="product.title"
             :frontImage="product.frontImage"

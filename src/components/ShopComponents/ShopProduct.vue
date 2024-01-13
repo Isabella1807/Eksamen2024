@@ -8,8 +8,13 @@ const addToCart = () => {
   store.dispatch('cart/addItemToCart', {productID: props.id, amount: 1});
 }
 
-const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 'deleteProduct', 'isAdmin'])
+const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 'isAdmin'])
 
+const deleteProduct = () => {
+  if (confirm('Are you sure you want to delete?')) {
+    store.dispatch('products/deleteProduct', {productID: props.id})
+  }
+}
 </script>
 
 <template>
@@ -27,7 +32,7 @@ const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 
           <img src="../../assets/images/add.png" alt="tilføj">
         </button>
         <div class="adminShopItemsContainer">
-          <button class="productAddProductButton" v-if="props.isAdmin" @click="() => props.deleteProduct(props.id)">
+          <button class="productAddProductButton" v-if="props.isAdmin" @click="() => deleteProduct()">
             <img src="../../assets/images/trash.png" alt="slet">
           </button>
           <button class="productAddProductButton" v-if="props.isAdmin" @click="() => props.editProduct(props.id)">

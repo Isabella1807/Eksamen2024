@@ -16,13 +16,19 @@ const actions = {
         if (state.products.length === 0) {
             commit('fetchAllProductsFromDB')
         }
+    },
+    deleteProduct({commit}, {productID}) {
+        commit('removeProductFromDB', {productID});
     }
 }
 
 const mutations = {
     async fetchAllProductsFromDB(state) {
       state.products = await productDB.getAllProducts();
-      console.log("anton berg ellerr");
+    },
+    async removeProductFromDB(state, {productID}) {
+        await productDB.deleteProduct(productID);
+        state.products = state.products.filter((productObject) => productObject.id !== productID);
     }
 }
 
