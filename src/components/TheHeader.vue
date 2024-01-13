@@ -6,10 +6,10 @@ import {useStore} from "vuex";
 const router = useRouter();
 const store = useStore();
 
-const totalCartAmount = computed (() => store.getters['cart/totalAmount'])
-
 const path = computed(() => router.currentRoute);
+const totalCartAmount = computed (() => store.getters['cart/totalAmount'])
 const isAdmin = computed(() => store.getters['user/isAdmin']);
+
 const adminLogout = () => {
   store.dispatch('user/logout');
 

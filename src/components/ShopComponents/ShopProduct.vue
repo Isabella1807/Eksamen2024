@@ -3,6 +3,7 @@ import {useStore} from "vuex";
 
 const store = useStore();
 
+
 const addToCart = () => {
   store.dispatch('cart/addItemToCart', {productID: props.id, amount: 1});
 }

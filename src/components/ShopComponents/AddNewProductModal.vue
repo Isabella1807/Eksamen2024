@@ -52,7 +52,6 @@ const submitNewProductForm = () => {
 }
 
 const addProductModalVisible = ref(false);
-
 const isEditing = ref(false);
 const editingProductId = ref('');
 const openEditProductModal = (product) => {

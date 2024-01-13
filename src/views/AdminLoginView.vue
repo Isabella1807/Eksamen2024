@@ -3,11 +3,10 @@ import {ref} from 'vue';
 import {useStore} from 'vuex'
 
 const store = useStore();
-
 const adminName = ref('');
 const adminPassword = ref('');
-
 let errorInLogin = false;
+
 const loginAsAdmin = async () => {
   const success = await store.dispatch('user/login', {username: adminName.value, password: adminPassword.value})
 

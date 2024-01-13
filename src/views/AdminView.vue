@@ -3,11 +3,9 @@ import { ref } from 'vue';
 import footer from '../database/footer';
 
 const addNewInformtaionFooter = ref(false);
-
 const formTitleFooter = ref('');
 const formHours = ref('');
 const formPhone = ref('');
-
 const infoIsMissing = ref(false);
 
 const showNewInformation = () => {
@@ -21,7 +19,6 @@ const hideNewInformation = () => {
   formPhone.value = '';
   infoIsMissing.value = false;
 }
-
 
 const submitNewInformation = () => {
   if (
@@ -37,7 +34,6 @@ const submitNewInformation = () => {
     formHours.value,
     formPhone.value,
   );
-
   hideNewInformation();
 };
 
