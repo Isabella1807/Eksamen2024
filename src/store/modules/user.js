@@ -1,11 +1,10 @@
-
 const adminLogin = {
     username: "admin",
     password: "qwe"
 }
 
 const state = () => ({
-    hasAdminRights: true
+    hasAdminRights: false
 })
 
 const getters = {
@@ -29,7 +28,6 @@ const actions = {
 
 const mutations = {
     setAdminState(state, {newAdminState}) {
-
         state.hasAdminRights = newAdminState;
     }
 }

@@ -9,6 +9,10 @@ const store = useStore();
 
 const {handleFileUpload, imageUrl} = useImageUpload();
 
+const addProductModalVisible = ref(false);
+const isEditing = ref(false);
+const editingProductId = ref('');
+
 const formTitle = ref('');
 const formDescription = ref('');
 const formPrice = ref('');
@@ -47,10 +51,6 @@ const submitNewProductForm = async () => {
     dataIsMissing.value = true;
   }
 }
-
-const addProductModalVisible = ref(false);
-const isEditing = ref(false);
-const editingProductId = ref('');
 
 const openEditProductModal = (product) => {
   isEditing.value = true;

@@ -1,4 +1,3 @@
-import {onMounted} from "vue";
 import productDB from "@/database/products";
 
 const state = () => ({
