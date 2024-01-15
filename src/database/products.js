@@ -6,17 +6,10 @@ const productsCollection = "products";
 /** ///////////// **/
 /** SHOW PRODUCTS **/
 /** ///////////// **/
-const getAllProducts = async (myCategory) => {
+const getAllProducts = async () => {
     const result = [];
 
-    let myQuery;
-    if (myCategory) {
-        myQuery = query(collection(myDB, productsCollection), where("category", "==", myCategory));
-    } else {
-        myQuery = collection(myDB, productsCollection);
-    }
-
-    await getDocs(myQuery)
+    await getDocs(collection(myDB, productsCollection))
         //.then & .catch tager ét paramter som er en callback funktion
         .then((allProducts) => {
             allProducts.forEach((product) => {
@@ -29,7 +22,6 @@ const getAllProducts = async (myCategory) => {
         }).catch(() => {
             console.log("getAllProducts fejlede");
         });
-
     return result;
 }
 
@@ -49,7 +41,6 @@ const addNewProduct = async ({title, frontImage, description, price, category}) 
     });
     return result.id;
 }
-
 
 /** ///////////// **/
 /** EDIT PRODUCTS **/

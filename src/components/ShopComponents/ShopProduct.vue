@@ -1,15 +1,12 @@
 <script setup>
 import {useStore} from "vuex";
 
+const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 'isAdmin'])
 const store = useStore();
-
 
 const addToCart = () => {
   store.dispatch('cart/addItemToCart', {productID: props.id, amount: 1});
 }
-
-const props = defineProps(['title', 'frontImage', 'price', 'id', 'editProduct', 'isAdmin'])
-
 const deleteProduct = () => {
   if (confirm('Are you sure you want to delete?')) {
     store.dispatch('products/deleteProduct', {productID: props.id})

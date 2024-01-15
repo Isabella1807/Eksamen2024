@@ -2,7 +2,6 @@
 import ShopProduct from "@/components/ShopComponents/ShopProduct.vue";
 import ShopCategorizer from "@/components/ShopComponents/ShopCategorizer.vue";
 import {onMounted, computed, ref} from "vue";
-import productDB from "../database/products";
 import AddNewProductModal from "@/components/ShopComponents/AddNewProductModal.vue";
 import {useStore} from "vuex";
 
@@ -26,18 +25,11 @@ const filteredProducts = computed(() => {
   // Products fungerer ikke uden vi skaffer en liste med .value
   return products.value.filter((item) => {
     return item.category === filteredCategory.value;
-    //ITS THE SAME
-    /*if (item.category === filteredCategory.value){
-      return true;
-    } else {
-      return false;
-    }*/
   });
 });
 
 ////////////ITEM INTERACTION///////////////
 const productModal = ref();
-
 const editProduct = (productId) => {
   productModal.value.openEditProductModal(products.value.find((item) => item.id === productId));
 }
